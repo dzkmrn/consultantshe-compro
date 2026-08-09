@@ -1,7 +1,29 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-$page = isset($_GET['page']) ? preg_replace('/[^a-z0-9\-]/', '', $_GET['page']) : 'home';
+/**
+ * Which page to render.
+ *
+ * Apache hands us ?page= through the rewrite in .htaccess. Vercel and the
+ * built-in server route the whole path here instead, so fall back to the first
+ * segment of the URL. Anything outside [a-z0-9-] is stripped, so a page name can
+ * never escape pages/.
+ */
+function requested_page(): string
+{
+    $page = $_GET['page'] ?? null;
+
+    if ($page === null) {
+        $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+        $page = explode('/', trim($path, '/'))[0];
+    }
+
+    $page = preg_replace('/[^a-z0-9\-]/', '', strtolower((string) $page));
+
+    return $page === '' ? 'home' : $page;
+}
+
+$page = requested_page();
 $page_file = __DIR__ . '/pages/' . $page . '.php';
 
 if (!is_file($page_file)) {

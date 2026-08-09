@@ -1,0 +1,9 @@
+# Design sources and local-only tooling. Keeping the reference artboards out
+# matters most: they are ~12 MB of JPGs that the site never serves.
+reference
+reference2
+.claude
+.shots
+router.php
+.htaccess
+ic_app.webp
