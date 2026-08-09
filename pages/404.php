@@ -1,7 +1,7 @@
-<section class="page-hero">
-    <div class="container" style="text-align:center; padding: 6rem 1rem;">
+<section class="error-page">
+    <div class="container">
         <h1>404</h1>
-        <p style="font-size:1.25rem; margin-bottom:2rem;">The page you're looking for doesn't exist.</p>
-        <a href="<?= BASE_URL ?>" class="btn btn--primary">Back to Home</a>
+        <p>Halaman yang Anda cari tidak ditemukan.</p>
+        <a href="<?= BASE_URL ?>" class="btn btn--primary btn--lg">Kembali ke Beranda</a>
     </div>
 </section>

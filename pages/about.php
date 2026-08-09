@@ -1,41 +1,52 @@
+<?php
+$about = content('about');
+?>
+
 <section class="page-hero">
     <div class="container">
         <h1>About Us</h1>
-        <p>Get to know <?= htmlspecialchars(SITE_NAME) ?></p>
+        <p><?= e($about['heading']) ?></p>
     </div>
 </section>
 
-<section class="about-page section">
+<section class="section">
     <div class="container">
-        <div class="about-page__grid">
-            <div class="about-page__content">
-                <h2>Our Story</h2>
-                <p>Established in <?= SITE_YEAR_FOUNDED ?>, <?= htmlspecialchars(SITE_NAME) ?> has grown into a comprehensive HSSE consulting, safety training, and competency re-assessment firm serving high-risk industries across Indonesia.</p>
-                <p>We believe that a strong safety culture is the foundation of every successful operation. Our mission is to help organizations build robust HSSE management systems, develop safety behavior, and maintain workforce competency.</p>
-                <p>With expertise spanning HSSE consulting, safety culture development, contractor safety management (CSMS), risk assessment, and competency re-assessment for heavy equipment operators, scaffolders, and riggers — we deliver solutions that genuinely transform safety performance.</p>
+        <div class="grid-2" style="align-items: center;">
+            <div>
+                <h2 style="margin-bottom: 1.25rem;">Our Story</h2>
+                <p style="color: var(--gray-500); margin-bottom: 1rem;">Established in <?= SITE_YEAR_FOUNDED ?>, <?= e(SITE_NAME) ?> has grown into a comprehensive SHE consulting, competency training, assessment, and procurement partner serving industries across Indonesia.</p>
+                <p style="color: var(--gray-500); margin-bottom: 1rem;"><?= e($about['lead']) ?></p>
+                <?php foreach ($about['paragraphs'] as $paragraph): ?>
+                <p style="color: var(--gray-500); margin-bottom: 1rem;"><?= e($paragraph) ?></p>
+                <?php endforeach; ?>
             </div>
-            <div class="about__image">
-                <img src="<?= ASSETS_URL ?>images/logo.webp" alt="<?= htmlspecialchars(SITE_NAME) ?>" class="about-page__logo-display">
-            </div>
+            <figure class="about__portrait">
+                <img src="<?= asset($about['portrait']['image']) ?>" alt="<?= e($about['portrait']['name']) ?>" loading="lazy">
+                <figcaption>
+                    <strong><?= e($about['portrait']['name']) ?></strong>
+                    <span class="about__portrait-dot" aria-hidden="true"></span>
+                    <?= e($about['portrait']['role']) ?>
+                </figcaption>
+            </figure>
         </div>
     </div>
 </section>
 
 <section class="section section--alt">
     <div class="container">
-        <div class="vm-page__grid">
-            <div class="vm-page__card">
+        <div class="grid-2">
+            <div class="panel">
                 <h3>Vision</h3>
-                <p>To be the leading HSSE consulting and competency assessment partner in Indonesia, recognized for delivering measurable impact on safety performance and workforce competence.</p>
+                <p>To be a trusted SHE partner recognized for delivering measurable impact on safety performance and workforce competency.</p>
             </div>
-            <div class="vm-page__card">
+            <div class="panel">
                 <h3>Mission</h3>
-                <ul class="vm-page__list">
-                    <li>Deliver expert HSSE consulting and safety management system development</li>
-                    <li>Provide practical safety training to build safety behavior and culture</li>
-                    <li>Ensure workforce competency through professional re-assessment services</li>
-                    <li>Develop CSMS and risk assessment frameworks for high-risk industries</li>
-                    <li>Build long-term partnerships based on trust, integrity, and results</li>
+                <ul class="bullet-list">
+                    <li>Deliver practical SHE consulting and management system development</li>
+                    <li>Build safety behaviour and culture through quality training</li>
+                    <li>Ensure workforce competency through professional assessment</li>
+                    <li>Support operations with reliable SHE procurement</li>
+                    <li>Build long-term partnerships based on trust and results</li>
                 </ul>
             </div>
         </div>
@@ -44,26 +55,21 @@
 
 <section class="section">
     <div class="container">
-        <div class="section__header">
-            <h2>Our Values</h2>
-        </div>
-        <div class="values__grid">
-            <div class="values__item">
-                <h4>Integrity</h4>
-                <p>We uphold the highest standards of honesty and ethical conduct in everything we do.</p>
+        <div class="section__header"><h2>Our Values</h2></div>
+        <div class="grid-auto">
+            <?php foreach ([
+                ['Integrity', 'We uphold the highest standards of honesty and ethical conduct in everything we do.'],
+                ['Excellence', 'We strive for excellence in delivery, client service, and professional standards.'],
+                ['Impact', 'We measure success by the real, tangible improvements we create for our clients.'],
+                ['Collaboration', 'We work alongside our clients as partners, not just service providers.'],
+            ] as [$title, $body]): ?>
+            <div class="panel">
+                <h4><?= e($title) ?></h4>
+                <p><?= e($body) ?></p>
             </div>
-            <div class="values__item">
-                <h4>Excellence</h4>
-                <p>We strive for excellence in program delivery, client service, and professional standards.</p>
-            </div>
-            <div class="values__item">
-                <h4>Impact</h4>
-                <p>We measure our success by the real, tangible improvements we create for our clients.</p>
-            </div>
-            <div class="values__item">
-                <h4>Collaboration</h4>
-                <p>We work closely with our clients as partners, not just service providers.</p>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
+
+<?php require __DIR__ . '/../includes/contact-cta.php'; ?>

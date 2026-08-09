@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="presentation">
+  <g fill="none" stroke="#8FD64A" stroke-width="1.4">
+    <!-- Diamond lattice: the outer rings meet mid-edge so tiles join seamlessly. -->
+    <path d="M80 0 160 80 80 160 0 80Z"/>
+    <path d="M80 26 134 80 80 134 26 80Z"/>
+    <path d="M80 62 98 80 80 98 62 80Z"/>
+    <path d="M0 0 40 40M160 0 120 40M0 160 40 120M160 160 120 120"/>
+    <!-- Stepped keys echoing the batik motif in the reference. -->
+    <path d="M80 26 80 44 62 44M80 134 80 116 98 116M26 80 44 80 44 62M134 80 116 80 116 98"/>
+  </g>
+</svg>

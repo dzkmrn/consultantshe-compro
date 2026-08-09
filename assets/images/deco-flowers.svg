@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 280" fill="none" role="presentation">
+  <defs>
+    <!-- Four-petal motif, centred on the origin, 100 units across. -->
+    <path id="petal4" d="M0 0C-18-14-18-36 0-50 18-36 18-14 0 0ZM0 0C14-18 36-18 50 0 36 18 14 18 0 0ZM0 0C18 14 18 36 0 50-18 36-18 14 0 0ZM0 0C-14 18-36 18-50 0-36-18-14-18 0 0Z"/>
+  </defs>
+  <g fill="#A9EF6B">
+    <use href="#petal4" x="210" y="35"/>
+    <use href="#petal4" x="90" y="155"/>
+    <use href="#petal4" x="90" y="215"/>
+    <use href="#petal4" x="185" y="225"/>
+  </g>
+  <g fill="#8FE451">
+    <use href="#petal4" x="150" y="95"/>
+    <use href="#petal4" x="210" y="95"/>
+    <use href="#petal4" x="150" y="155"/>
+    <use href="#petal4" x="30" y="215"/>
+  </g>
+</svg>
