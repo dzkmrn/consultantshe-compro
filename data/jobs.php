@@ -1,7 +1,7 @@
 <?php
 /**
  * Open vacancies rendered on the Career page.
- * Content transcribed from reference2/Loker.png.
+ * Content transcribed from "Career ENGLISH.docx" — the page is English only.
  *
  * To publish a new opening, append an entry. To close one, delete it —
  * the page falls back to an "no openings" notice when the list is empty.
@@ -13,52 +13,52 @@ return [
         'title'    => 'Safety Leadership Trainer',
         'urgent'   => true,
         'type'     => 'Contract',
-        'location' => 'DKI Jakarta',
+        'location' => 'Jakarta, DKI Jakarta',
         'banner'   => 'images/career-banner.jpg',
-        'deadline' => '16 Juni 2028',
-        'summary'  => 'Kami mencari Safety Leadership Trainer yang berpengalaman untuk memfasilitasi '
-            . 'pelatihan berbasis immersive learning, experiential learning, dan metode interaktif '
-            . 'guna meningkatkan budaya keselamatan, kepemimpinan keselamatan, serta perubahan '
-            . 'perilaku di Tangguh UCC Project.',
+        'summary'  => 'We are looking for an experienced Safety Leadership Trainer to facilitate '
+            . 'training using immersive learning, experiential learning, and interactive methods '
+            . 'to strengthen safety culture, safety leadership, and behavioral change at the '
+            . 'Tangguh UCC Project.',
         'quals' => [
             [
-                'text'  => 'Pengalaman 5–10 tahun sebagai trainer, fasilitator, atau konsultan pelatihan '
-                    . 'di bidang K3, Safety Leadership, Human Performance, atau bidang terkait.',
+                'text'  => '5–10 years of experience as a trainer, facilitator, or training consultant '
+                    . 'in Occupational Health and Safety (OHS), Safety Leadership, Human Performance, '
+                    . 'or a related field.',
                 'items' => [],
             ],
             [
-                'text'  => 'Memiliki pengalaman memfasilitasi pelatihan untuk level:',
-                'items' => ['Supervisor', 'Superintendent', 'Manager', 'Senior Leadership'],
+                'text'  => 'Experience facilitating training for:',
+                'items' => ['Supervisors', 'Superintendents', 'Managers', 'Senior Leaders'],
             ],
             [
-                'text'  => 'Mampu mengajar dan memfasilitasi pelatihan dalam:',
+                'text'  => 'Able to deliver and facilitate training in:',
                 'items' => [
-                    'Bahasa Indonesia',
-                    'Bahasa Inggris (minimal level profesional untuk presentasi dan fasilitasi kelas)',
+                    'Indonesian',
+                    'English (minimum professional proficiency for presentations and classroom facilitation)',
                 ],
             ],
             [
-                'text'  => 'Berpengalaman menggunakan metode pembelajaran:',
+                'text'  => 'Experienced in using learning methods such as:',
                 'items' => [
                     'Immersive Learning',
                     'Experiential Learning',
                     'Scenario-Based Learning',
                     'Gamification',
-                    'Interactive Workshop',
+                    'Interactive Workshops',
                     'Simulation & Role Play',
                 ],
             ],
             [
-                'text'  => 'Mampu mengoperasikan dan mengembangkan penggunaan:',
+                'text'  => 'Proficient in using and developing:',
                 'items' => [
-                    'Training Kit Interaktif',
-                    'Safety Learning Simulation',
+                    'Interactive Training Kits',
+                    'Safety Learning Simulations',
                     'Immersive Learning Tools',
-                    'Facilitation Tools dan Learning Media',
+                    'Facilitation Tools and Learning Media',
                 ],
             ],
             [
-                'text'  => 'Berdomisili Jakarta dan sekitarnya.',
+                'text'  => 'Based in Jakarta or surrounding areas.',
                 'items' => [],
             ],
         ],

@@ -9,9 +9,9 @@ define('SITE_SHORT_NAME', 'PT Jasa General ConsultantSHE');
 define('SITE_TAGLINE', 'Building Safer Workplaces, Stronger Teams, and Better Operations');
 define('SITE_DESCRIPTION', 'PT Jasa General Consultant SHE helps organizations strengthen Safety, Health, and Environment practices through consulting, competency development, assessment, and procurement support.');
 
-define('SITE_EMAIL', 'generalconsultant@jasagenshe.com');
-define('SITE_PHONE', '+62 811 8886 8882');
-define('SITE_WHATSAPP', '6281188868882');
+define('SITE_EMAIL', 'jasageneral@jasagenshe.com');
+define('SITE_PHONE', '+62 859 7755 5933');
+define('SITE_WHATSAPP', '6285977555933');
 define('SITE_WHATSAPP_TEMPLATE', 'Halo PT Jasa General Consultant SHE, saya tertarik dengan layanan perusahaan Anda. Boleh minta informasi lebih lanjut?');
 define('SITE_INSTAGRAM', 'general_consultantshe');
 

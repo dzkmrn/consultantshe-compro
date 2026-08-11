@@ -448,12 +448,27 @@ h1, h2, h3, h4 {
 }
 .hero > * { grid-area: 1 / 1; min-height: 0; }
 
-.hero__photo { position: relative; }
-.hero__photo img {
+/* The hero is two layers: a blurred site photo and the crew cut-out on top of
+   it, so either one can be reshot without re-compositing the other. */
+.hero__photo { position: relative; overflow: hidden; }
+.hero__bg {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Bottom-aligned: crops the flat green band above the skyline. */
     object-position: 50% 100%;
+}
+.hero__crew {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    /* Height-driven so the crew keeps the same framing at any viewport width. */
+    height: 84%;
+    width: auto;
+    max-width: none;
+    transform: translateX(-50%);
 }
 /* Blends the photo into the stage so hero and services read as one surface. */
 .hero__photo::after {
@@ -635,9 +650,6 @@ h1, h2, h3, h4 {
    Justified rows: every tile in a row shares one height and its width comes
    from the image's own aspect ratio (--ratio), so rows sit flush.
    ========================================================================== */
-/* Width is left to auto on purpose: the home strip widens this box with negative
-   margins, which a fixed width would turn into a sideways shift and leave a gap
-   down the right edge. */
 .gallery__bleed { padding-inline: var(--gutter); }
 
 .gallery__grid {
@@ -664,20 +676,50 @@ h1, h2, h3, h4 {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Home strip: two rows that bleed off both edges, exactly as in the mockup.
-   The negative margin is contained here so it never widens the document. */
-.gallery-strip { padding: 2rem 0 4rem; overflow: hidden; }
-.gallery-strip .gallery__bleed {
-    padding: 0;
-    margin-inline: -3.5rem;
+/* Home strip: two rows that scroll on their own, opposite ways, bleeding off
+   both edges. overflow here keeps the travelling tiles out of the page scroll. */
+.gallery-strip {
+    --gallery-row: 175px;
+    --gallery-gap: 10px;
+    padding: 2rem 0 4rem;
     overflow: hidden;
 }
-/* Clipped to two rows; any extra photos wrap onto a hidden third row. */
-.gallery-strip .gallery__grid {
-    --gallery-row: 175px;
-    max-height: calc(var(--gallery-row) * 2 + 10px);
-}
 .gallery-strip__footer { display: flex; justify-content: center; margin-top: 2rem; }
+
+.marquee { overflow: hidden; }
+.marquee + .marquee { margin-top: var(--gallery-gap); }
+
+.marquee__track {
+    display: flex;
+    width: max-content;
+    animation: gallery-marquee var(--marquee-duration, 60s) linear infinite;
+}
+.marquee--reverse .marquee__track { animation-direction: reverse; }
+/* Stop under the pointer or a keyboard focus so a photo can be looked at. */
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track { animation-play-state: paused; }
+
+.marquee__item {
+    flex: none;
+    /* The gap rides on the item, which makes one lap exactly half the track. */
+    margin-right: var(--gallery-gap);
+    width: calc(var(--ratio) * var(--gallery-row));
+    height: var(--gallery-row);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--gray-100);
+}
+.marquee__item img { width: 100%; height: 100%; object-fit: cover; }
+
+@keyframes gallery-marquee {
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* No travel; the row becomes a plain swipeable strip instead. */
+    .marquee__track { animation: none; }
+    .marquee { overflow-x: auto; }
+}
 
 /* Gallery page */
 .gallery { padding: 3.5rem 0 5rem; }
@@ -823,9 +865,12 @@ h1, h2, h3, h4 {
 .centers { position: relative; z-index: 1; padding: 2rem 0 5rem; }
 .centers .section-title { margin-bottom: 2.5rem; }
 
+/* auto-fit keeps the row centred when a centre is temporarily taken out of
+   data/centers.php, instead of leaving a hole on the right. */
 .centers__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 400px));
+    justify-content: center;
     gap: 2.25rem;
 }
 
@@ -1109,6 +1154,10 @@ h1, h2, h3, h4 {
     gap: 2.5rem;
     padding: 2rem;
 }
+/* Placed explicitly: the markup lists the details before the apply box, which
+   is the order the stacked layout needs, and this keeps the box top-right here. */
+.job__main  { grid-column: 1; grid-row: 1; }
+.job__aside { grid-column: 2; grid-row: 1; }
 
 .job__badge {
     display: inline-flex;
@@ -1155,6 +1204,7 @@ h1, h2, h3, h4 {
 
 .job__details {
     grid-column: 1 / -1;
+    grid-row: 2;
     padding-top: 1.75rem;
     border-top: 1px solid var(--gray-300);
 }
@@ -1342,7 +1392,9 @@ h1, h2, h3, h4 {
 
     .career-hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .career-hero__media { max-width: 460px; aspect-ratio: 4 / 3; }
+    /* Single column: source order takes over, so the apply box lands last. */
     .job__body { grid-template-columns: 1fr; gap: 1.75rem; }
+    .job__main, .job__aside, .job__details { grid-column: auto; grid-row: auto; }
 }
 
 @media (max-width: 860px) {
@@ -1377,7 +1429,9 @@ h1, h2, h3, h4 {
         min-height: 0;
     }
     .hero > * { grid-area: auto; }
-    .hero__photo img { height: auto; aspect-ratio: 1440 / 886; object-position: 50% 100%; }
+    .hero__photo { aspect-ratio: 1440 / 886; }
+    /* Width-driven here so the outer two crew members are never cropped away. */
+    .hero__crew { width: 100%; height: auto; }
     .hero__photo::after {
         background: linear-gradient(180deg, rgba(2, 16, 10, 0) 55%, rgba(2, 16, 10, 0.75) 82%, var(--ink-900) 100%);
     }
@@ -1409,8 +1463,8 @@ h1, h2, h3, h4 {
         box-shadow: 0 2px 6px rgba(16, 21, 16, 0.18);
     }
 
-    .gallery-strip .gallery__bleed { margin-inline: calc(var(--gutter) * -1); }
-    .gallery__grid, .gallery-strip .gallery__grid { --gallery-row: 120px; gap: 8px; }
+    .gallery__grid { --gallery-row: 120px; gap: 8px; }
+    .gallery-strip { --gallery-row: 120px; --gallery-gap: 8px; }
 
     .grid-2, .form-row { grid-template-columns: 1fr; }
     .footer__inner { flex-direction: column; text-align: center; }
@@ -1429,7 +1483,8 @@ h1, h2, h3, h4 {
 
     .job__banner { aspect-ratio: 16 / 7; }
     .job__body { padding: 1.5rem 1.25rem; }
-    .gallery__grid, .gallery-strip .gallery__grid { --gallery-row: 96px; gap: 6px; }
+    .gallery__grid { --gallery-row: 96px; gap: 6px; }
+    .gallery-strip { --gallery-row: 96px; --gallery-gap: 6px; }
     .lightbox__nav { width: 40px; height: 40px; }
     .lightbox__nav--prev { left: 0.5rem; }
     .lightbox__nav--next { right: 0.5rem; }

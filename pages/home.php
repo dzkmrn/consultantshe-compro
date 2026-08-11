@@ -7,7 +7,9 @@ $about     = content('about');
 $centers   = content('centers');
 $map       = content('locations');
 
-$gallery = gallery_photos(9);
+// Every photo, split into the two rows of the auto-scrolling home strip.
+$gallery = gallery_photos();
+$gallery_rows = $gallery ? array_chunk($gallery, (int) ceil(count($gallery) / 2)) : [];
 
 /** Plate-carree projection — see data/locations.php for the frame contract. */
 $pin_position = static function (array $pin) use ($map): array {
@@ -26,7 +28,8 @@ $pin_position = static function (array $pin) use ($map): array {
 
     <section class="hero" id="top">
         <div class="hero__photo">
-            <img src="<?= asset('images/HeroNew.png') ?>" alt="Tim <?= e(SITE_NAME) ?>" width="1440" height="1000" fetchpriority="high">
+            <img class="hero__bg" src="<?= asset('images/HeroBackground.png') ?>" alt="" width="1440" height="1000" fetchpriority="high">
+            <img class="hero__crew" src="<?= asset('images/HeroPeopleImage.png') ?>" alt="Tim <?= e(SITE_NAME) ?>" width="1647" height="955" fetchpriority="high">
         </div>
         <div class="container hero__inner">
             <h1 class="hero__title">Building Safer Workplaces, Stronger Teams, and Better Operations</h1>
@@ -129,17 +132,27 @@ $pin_position = static function (array $pin) use ($map): array {
         </div>
     </section>
 
-    <?php if ($gallery): ?>
+    <?php if ($gallery_rows): ?>
     <section class="gallery-strip" aria-label="Dokumentasi kegiatan">
-        <div class="gallery__bleed">
-            <div class="gallery__grid">
-                <?php foreach ($gallery as $photo): ?>
-                <div class="gallery__item" style="--ratio: <?= $photo['ratio'] ?>">
+        <?php foreach ($gallery_rows as $index => $row):
+            // A lap covers the row's own width. Timing it off the summed aspect
+            // ratios keeps both rows at the same speed however many photos each
+            // one holds, and at every breakpoint.
+            $laps = array_sum(array_column($row, 'ratio')); ?>
+        <div class="marquee<?= $index % 2 ? ' marquee--reverse' : '' ?>" style="--marquee-duration: <?= round($laps * 5, 1) ?>s">
+            <div class="marquee__track">
+                <?php // Printed twice: the second pass is what makes the loop seamless.
+                for ($pass = 0; $pass < 2; $pass++):
+                    foreach ($row as $photo): ?>
+                <div class="marquee__item" style="--ratio: <?= $photo['ratio'] ?>"<?= $pass ? ' aria-hidden="true"' : '' ?>>
                     <img src="<?= e($photo['url']) ?>" alt="" width="<?= $photo['w'] ?>" height="<?= $photo['h'] ?>" loading="lazy" decoding="async">
                 </div>
-                <?php endforeach; ?>
+                    <?php endforeach;
+                endfor; ?>
             </div>
         </div>
+        <?php endforeach; ?>
+
         <div class="container gallery-strip__footer">
             <a href="<?= BASE_URL ?>gallery" class="btn btn--primary">View Full Gallery</a>
         </div>

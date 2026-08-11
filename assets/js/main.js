@@ -46,8 +46,11 @@
             const open = panel.hasAttribute('hidden');
             panel.toggleAttribute('hidden', !open);
             toggle.setAttribute('aria-expanded', String(open));
+            // Both wordings ride on the button so the copy stays in the markup.
             if (label) {
-                label.textContent = open ? 'Sembunyikan Detail Lowongan' : 'Lihat Detail Lowongan';
+                label.textContent = open
+                    ? toggle.dataset.labelOpen || label.textContent
+                    : toggle.dataset.labelClosed || label.textContent;
             }
         });
     });

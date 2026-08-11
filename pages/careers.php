@@ -29,7 +29,7 @@ $hero_points = [
         </div>
 
         <figure class="career-hero__media">
-            <img src="<?= asset('images/career-hero.jpg') ?>" alt="Tim <?= e(SITE_NAME) ?> di lapangan" width="931" height="861">
+            <img src="<?= asset('images/career-hero.jpg') ?>" alt="The <?= e(SITE_NAME) ?> team on site" width="931" height="861">
             <figcaption>Grow with us, make an impact, and build a safer future as part of our team.</figcaption>
         </figure>
     </div>
@@ -42,16 +42,16 @@ $hero_points = [
 
         <?php if (!$jobs): ?>
         <p class="openings__empty">
-            Belum ada lowongan yang dibuka saat ini. Kirimkan CV Anda ke
+            There are no openings at the moment. Send your CV to
             <a href="mailto:<?= e(CAREERS_EMAIL) ?>"><?= e(CAREERS_EMAIL) ?></a>
-            untuk pertimbangan di masa mendatang.
+            and we will keep it on file for future roles.
         </p>
         <?php else: ?>
 
         <div class="openings__list">
             <?php foreach ($jobs as $i => $job):
                 $panel_id = 'job-detail-' . $i;
-                $apply_url = 'mailto:' . CAREERS_EMAIL . '?subject=' . rawurlencode('Lamaran - ' . $job['title']);
+                $apply_url = 'mailto:' . CAREERS_EMAIL . '?subject=' . rawurlencode('Application - ' . $job['title']);
             ?>
             <article class="job">
                 <div class="job__banner">
@@ -61,28 +61,24 @@ $hero_points = [
                 <div class="job__body">
                     <div class="job__main">
                         <?php if (!empty($job['urgent'])): ?>
-                        <p class="job__badge"><?= icon('push-pin', 16) ?>Dibutuhkan Segera</p>
+                        <p class="job__badge"><?= icon('push-pin', 16) ?>Urgently Hiring</p>
                         <?php endif; ?>
 
                         <h3 class="job__title"><?= e($job['title']) ?></h3>
                         <p class="job__summary"><?= e($job['summary']) ?></p>
 
-                        <button type="button" class="job__toggle" data-job-toggle aria-expanded="false" aria-controls="<?= $panel_id ?>">
-                            <span data-job-toggle-label>Lihat Detail Lowongan</span>
+                        <button type="button" class="job__toggle" data-job-toggle aria-expanded="false" aria-controls="<?= $panel_id ?>"
+                                data-label-closed="View Job Details" data-label-open="Hide Job Details">
+                            <span data-job-toggle-label>View Job Details</span>
                             <?= icon('chevron-down', 16) ?>
                         </button>
                     </div>
 
-                    <aside class="job__aside">
-                        <ul class="job__meta">
-                            <li><?= icon('briefcase', 18) ?><?= e($job['type']) ?></li>
-                            <li><?= icon('map-pin', 18) ?><?= e($job['location']) ?></li>
-                        </ul>
-                        <a class="btn btn--primary btn--block" href="<?= e($apply_url) ?>">Lamar Pekerjaan</a>
-                    </aside>
-
+                    <!-- Details come before the apply box so that once they are open the
+                         stacked layout ends on the button. Wide screens place both with
+                         grid, where source order does not decide what sits where. -->
                     <div class="job__details" id="<?= $panel_id ?>" hidden>
-                        <h4>Kualifikasi</h4>
+                        <h4>Qualifications</h4>
                         <ul class="job__quals">
                             <?php foreach ($job['quals'] as $qual): ?>
                             <li>
@@ -102,10 +98,17 @@ $hero_points = [
                         </ul>
 
                         <p class="job__footnote">
-                            <span>Paling lambat <strong><?= e($job['deadline']) ?></strong></span>
-                            <span>Kirimkan lamaran Anda ke <a href="<?= e($apply_url) ?>"><?= e(CAREERS_EMAIL) ?></a></span>
+                            <span>Send your application to <a href="<?= e($apply_url) ?>"><?= e(CAREERS_EMAIL) ?></a></span>
                         </p>
                     </div>
+
+                    <aside class="job__aside">
+                        <ul class="job__meta">
+                            <li><?= icon('briefcase', 18) ?><?= e($job['type']) ?></li>
+                            <li><?= icon('map-pin', 18) ?><?= e($job['location']) ?></li>
+                        </ul>
+                        <a class="btn btn--primary btn--block" href="<?= e($apply_url) ?>">Apply for This Position</a>
+                    </aside>
                 </div>
             </article>
             <?php endforeach; ?>

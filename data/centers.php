@@ -22,14 +22,6 @@ return [
             'Daerah Khusus Ibukota Jakarta 12770',
         ],
     ],
-    [
-        'name'  => 'Bangun Negeri Centre',
-        'image' => 'train3.png',
-        'alt'   => 'Gedung Bangun Negeri Centre di Bogor',
-        'address' => [
-            'Jl. Swadaya Pabuaran 1 Ciangsana',
-            'Kec. Gn. Putri, Kabupaten Bogor',
-            'West Java 16968',
-        ],
-    ],
+    // Bangun Negeri Centre is parked until the Kajima photos clear RA approval.
+    // Re-add it here with its image and the grid picks it back up on its own.
 ];
