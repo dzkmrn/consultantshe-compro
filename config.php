@@ -85,10 +85,20 @@ function wa_link(?string $message = null): string
     return 'https://wa.me/' . SITE_WHATSAPP . '?text=' . rawurlencode($message ?? SITE_WHATSAPP_TEMPLATE);
 }
 
-/** Absolute URL for a file inside assets/. */
+/**
+ * Absolute URL for a file inside assets/, stamped with the file's mtime.
+ *
+ * The stamp is what stops a CDN or a browser from holding on to last week's
+ * stylesheet after a deploy: the file changes, the URL changes with it, and the
+ * long cache lifetime the host sets becomes an advantage rather than a trap.
+ */
 function asset(string $path): string
 {
-    return ASSETS_URL . ltrim($path, '/');
+    $relative = ltrim($path, '/');
+    $file = __DIR__ . '/assets/' . rawurldecode($relative);
+    $stamp = is_file($file) ? filemtime($file) : false;
+
+    return ASSETS_URL . $relative . ($stamp ? '?v=' . $stamp : '');
 }
 
 /** Loads a content array from data/. */
