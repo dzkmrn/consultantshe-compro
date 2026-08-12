@@ -29,7 +29,7 @@ $pin_position = static function (array $pin) use ($map): array {
     <section class="hero" id="top">
         <div class="hero__photo">
             <img class="hero__bg" src="<?= asset('images/HeroBackground.png') ?>" alt="" width="1440" height="1000" fetchpriority="high">
-            <img class="hero__crew" src="<?= asset('images/HeroPeopleImage.png') ?>" alt="Tim <?= e(SITE_NAME) ?>" width="1647" height="955" fetchpriority="high">
+            <img class="hero__crew" src="<?= asset('images/HeroPeopleImage.png') ?>" alt="The <?= e(SITE_NAME) ?> team" width="1647" height="955" fetchpriority="high">
         </div>
         <div class="container hero__inner">
             <h1 class="hero__title">Building Safer Workplaces, Stronger Teams, and Better Operations</h1>
@@ -133,7 +133,7 @@ $pin_position = static function (array $pin) use ($map): array {
     </section>
 
     <?php if ($gallery_rows): ?>
-    <section class="gallery-strip" aria-label="Dokumentasi kegiatan">
+    <section class="gallery-strip" aria-label="Activity documentation">
         <?php foreach ($gallery_rows as $index => $row):
             // A lap covers the row's own width. Timing it off the summed aspect
             // ratios keeps both rows at the same speed however many photos each
@@ -165,7 +165,7 @@ $pin_position = static function (array $pin) use ($map): array {
             <p class="section-lead">Our presence across multiple locations in Indonesia enables faster coordination, better access to local resources, and more responsive support for clients across regions and industries.</p>
 
             <div class="presence__map">
-                <img class="presence__outline" src="<?= asset('images/indonesia-map.svg') ?>" alt="Peta sebaran lokasi <?= e(SITE_NAME) ?> di Indonesia" loading="lazy">
+                <img class="presence__outline" src="<?= asset('images/indonesia-map.svg') ?>" alt="Map of <?= e(SITE_NAME) ?> locations across Indonesia" loading="lazy">
                 <ul class="presence__pins">
                     <?php foreach ($map['pins'] as $pin):
                         $pos = $pin_position($pin); ?>

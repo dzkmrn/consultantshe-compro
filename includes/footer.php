@@ -2,7 +2,7 @@
 $maps_url = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode(SITE_ADDRESS);
 
 $footer_links = [
-    ['icon' => 'map-pin-solid',    'url' => $maps_url,                                   'label' => 'Lokasi kami'],
+    ['icon' => 'map-pin-solid',    'url' => $maps_url,                                   'label' => 'Our location'],
     ['icon' => 'instagram-solid',  'url' => 'https://instagram.com/' . SITE_INSTAGRAM,    'label' => 'Instagram'],
     ['icon' => 'whatsapp',         'url' => wa_link(),                                   'label' => 'WhatsApp'],
     ['icon' => 'mail-solid',       'url' => 'mailto:' . SITE_EMAIL,                      'label' => 'Email'],
@@ -29,7 +29,7 @@ $footer_links = [
         </div>
     </footer>
 
-    <a href="<?= e(wa_link()) ?>" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Chat lewat WhatsApp">
+    <a href="<?= e(wa_link()) ?>" class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
         <?= icon('whatsapp', 30) ?>
     </a>
 
