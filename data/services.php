@@ -1,14 +1,16 @@
 <?php
 /**
- * Service cards shown on the home page.
+ * Service cards shown on the home page and expanded on /services.
  *
- * 'icon'  — key from includes/icons.php
- * 'items' — bullet list; a nested array renders as one bullet with line breaks.
+ * 'icon'   — key from includes/icons.php
+ * 'items'  — bullet list on the card; a nested array is one bullet with line breaks.
+ * 'topics' — optional long list. Too long for a card, so the home page puts it
+ *            behind a toggle that opens a full-width panel under the grid.
  */
 return [
     [
         'title' => 'Procurement',
-        'icon'  => 'monitor',
+        'icon'  => 'briefcase',
         'items' => [
             'SHE Equipment',
             'Office & Training Equipment',
@@ -23,12 +25,16 @@ return [
         'title' => 'Consultancy',
         'icon'  => 'presentation',
         'items' => [
-            'SHE Management System',
+            [
+                'HSE Management Systems — SMK3, SMKM Migas,',
+                'SMKP, CSMS, ISO 45001/9001/14001/29001, PSM',
+            ],
+            'SOP, forms & practical operational tools',
+            'Risk & gap assessment · Safety culture maturity',
+            'Roadmap implementation aligned with industry best practice',
             'Organizational Development',
             'Technical and NonTechnical Assessment & Coaching',
             'Training Need Analysis',
-            'Cultural Assessment',
-            'Robust Safety Culture Development',
             'SHE Inspection',
         ],
     ],
@@ -48,6 +54,68 @@ return [
                 'Kemenakertrans RI, ESDM, ISO, BNSP,',
                 'Kemenhub, NIOSH, NEBOSH)',
             ],
+        ],
+        'topics' => [
+            'Introduction to HSE',
+            'Safety Culture',
+            'HSE Roles and Responsibilities',
+            'Hazard Identification',
+            'Risk Assessment (HIRARC)',
+            'Incident and Near Miss Reporting',
+            'Use of Personal Protective Equipment (PPE)',
+            'Workplace Housekeeping (5S)',
+            'Toolbox Talk / Safety Briefing',
+            'Emergency Preparedness',
+            'Permit to Work',
+            'Working at Heights',
+            'Energy Isolation (LOTO)',
+            'Gas Detection',
+            'Line of Fire',
+            'Working at Height Procedure',
+            'Safe Driving and Journey Management',
+            'Bypass Critical Protection Procedure',
+            'Confined Space Entry',
+            'Behavior Based Safety',
+            'Root Cause Analysis (RCA)',
+            'Incident Investigation',
+            'Management of Change (MOC)',
+            'Contractor HSE Management',
+            'Safety Leadership',
+            'Safety Observation and Intervention',
+            'Lifting and Rigging Safety',
+            'Fall Protection',
+            'Fire Prevention and Firefighting',
+            'Emergency Drill Execution',
+            'Chemical Hazard Management',
+            'Heat Stress Management',
+            'Ergonomics in the Workplace',
+            'Noise and Vibration Exposure',
+            'Occupational Hygiene',
+            'Fatigue Risk Management',
+            'Repetitive Stress Injury Prevention',
+            'Safety Critical Elements (SECE)',
+            'Major Accident Hazard (MAH)',
+            'HSE Risk Management',
+            'Defensive Driving',
+            'Spill Prevention and Control',
+            'Internal HSE Audit',
+            'Environmental Management',
+            'Emergency Response',
+            'HSE Performance Monitoring',
+            'HSE Training and Competency Development',
+            'HSE Digitalization',
+            'HSE Career Mentoring',
+            'HSE in Oil & Gas Industry',
+        ],
+    ],
+    [
+        'title' => 'Digitalisation',
+        'icon'  => 'monitor',
+        'items' => [
+            'Digital Permit to Work — role-based approvals & close-out',
+            'Incident & observation reporting (unsafe acts/conditions)',
+            'Dashboards · KPI · Action tracking · Journey Management',
+            'Mobile-friendly inspections, audits, MCU monitoring',
         ],
     ],
 ];

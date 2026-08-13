@@ -19,6 +19,8 @@ const ICON_PATHS = [
     'arrow-up-right' => '<path d="M7 17 17 7"/><path d="M9 7h8v8"/>',
     'arrow-circle' => '<circle cx="12" cy="12" r="9.2"/><path d="M9 15l6-6"/><path d="M9.9 9H15v5.1"/>',
     'chevron-down' => '<path d="m6 9.5 6 6 6-6"/>',
+    'chevron-left' => '<path d="m14.5 6-6 6 6 6"/>',
+    'chevron-right' => '<path d="m9.5 6 6 6-6 6"/>',
     'briefcase' => '<rect x="2.5" y="7" width="19" height="13" rx="2.2"/><path d="M8.5 7V5.4A1.9 1.9 0 0 1 10.4 3.5h3.2a1.9 1.9 0 0 1 1.9 1.9V7"/>',
 
     // --- Contact -------------------------------------------------------

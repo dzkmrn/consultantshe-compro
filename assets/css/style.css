@@ -353,6 +353,52 @@ h1, h2, h3, h4 {
 
 .card__action { margin-top: 2rem; }
 
+/* Paged list inside a card: one screenful of items at a time, with arrows and
+   dots underneath. The arrows sit below rather than over the list because a
+   card in this grid is too narrow to give up ~70px on either side. */
+.pager { display: flex; flex-direction: column; flex: 1; }
+.pager__viewport { flex: 1; overflow: hidden; }
+.pager__track {
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Every page is a full viewport wide, so one step is one translate of 100%. */
+.pager__page { flex: 0 0 100%; }
+
+.pager__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.pager__arrow {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--white);
+    transition: background-color var(--ease), opacity var(--ease);
+}
+.pager__arrow:hover:not(:disabled) { background: var(--green-primary); }
+.pager__arrow:disabled { opacity: 0.3; cursor: default; }
+
+.pager__dots { display: flex; align-items: center; gap: 0.4rem; }
+.pager__dots button {
+    display: block;
+    width: 7px;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-pill);
+    transition: width var(--ease), background-color var(--ease);
+}
+.pager__dots button[aria-current='true'] { width: 20px; background: var(--green-primary); }
+
 /* ==========================================================================
    06  NAVBAR
    ========================================================================== */
@@ -522,10 +568,13 @@ h1, h2, h3, h4 {
 
 .services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* auto-fit rather than a fixed count: services get added over time and the
+       row should rebalance instead of leaving a card stranded on its own. */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 2rem;
     align-items: stretch;
 }
+
 
 .services__footer {
     display: flex;
@@ -1379,7 +1428,6 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 980px) {
-    .services__grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
     .about__grid { grid-template-columns: 1fr; }
     .about__portrait { max-width: 388px; margin-inline: auto; aspect-ratio: 4 / 3; }
     .centers__grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; gap: 3rem; }

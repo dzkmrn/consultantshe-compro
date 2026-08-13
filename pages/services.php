@@ -23,6 +23,15 @@ $services = content('services');
                     <li><?= is_array($item) ? implode(' ', array_map('e', $item)) : e($item) ?></li>
                     <?php endforeach; ?>
                 </ul>
+
+                <?php if (!empty($service['topics'])): ?>
+                <h3 style="margin-top: 2rem; color: var(--green-deep);">Training Topics</h3>
+                <ul class="bullet-list" style="margin-top: 1rem; columns: 15rem; column-gap: 2.5rem;">
+                    <?php foreach ($service['topics'] as $topic): ?>
+                    <li><?= e($topic) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
             </article>
             <?php endforeach; ?>
         </div>

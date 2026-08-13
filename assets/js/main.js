@@ -36,10 +36,45 @@
         });
     }
 
-    /* ------------------------------------------------- Career: vacancy detail */
-    document.querySelectorAll('[data-job-toggle]').forEach((toggle) => {
+    /* ------------------------------------------- Paged list inside a card */
+    document.querySelectorAll('[data-pager]').forEach((pager) => {
+        const track = pager.querySelector('[data-pager-track]');
+        if (!track) return;
+
+        const pages = Array.from(track.children);
+        const dots = Array.from(pager.querySelectorAll('[data-pager-dot]'));
+        const steps = Array.from(pager.querySelectorAll('[data-pager-step]'));
+        let current = 0;
+
+        const show = (index) => {
+            current = Math.max(0, Math.min(index, pages.length - 1));
+            track.style.transform = `translateX(-${current * 100}%)`;
+
+            // Pages off to the side stay in the DOM, so hide them from assistive
+            // tech and from tabbing rather than leaving them silently reachable.
+            pages.forEach((page, i) => {
+                page.toggleAttribute('inert', i !== current);
+                page.setAttribute('aria-hidden', String(i !== current));
+            });
+            dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+            steps.forEach((step) => {
+                const next = current + Number(step.dataset.pagerStep);
+                step.disabled = next < 0 || next > pages.length - 1;
+            });
+        };
+
+        steps.forEach((step) => {
+            step.addEventListener('click', () => show(current + Number(step.dataset.pagerStep)));
+        });
+        dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+
+        show(0);
+    });
+
+    /* --------------------------------- Disclosure: vacancy detail, topic lists */
+    document.querySelectorAll('[data-toggle-panel]').forEach((toggle) => {
         const panel = document.getElementById(toggle.getAttribute('aria-controls'));
-        const label = toggle.querySelector('[data-job-toggle-label]');
+        const label = toggle.querySelector('[data-toggle-panel-label]');
         if (!panel) return;
 
         toggle.addEventListener('click', () => {

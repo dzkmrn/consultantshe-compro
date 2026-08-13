@@ -46,11 +46,45 @@ $pin_position = static function (array $pin) use ($map): array {
             <h2 class="section-title section-title--on-dark">Our Services</h2>
 
             <div class="services__grid">
-                <?php foreach ($services as $service): ?>
+                <?php foreach ($services as $service):
+                    // A card with topics pages through them instead of listing its
+                    // categories, which is the only way 50 lines fit a card this size.
+                    $topic_pages = array_chunk($service['topics'] ?? [], 8); ?>
                 <article class="card">
                     <span class="card__icon"><?= icon($service['icon'], 24) ?></span>
                     <h3 class="card__title"><?= e($service['title']) ?></h3>
 
+                    <?php if ($topic_pages): ?>
+                    <div class="pager" data-pager>
+                        <div class="pager__viewport">
+                            <div class="pager__track" data-pager-track>
+                                <?php foreach ($topic_pages as $topics): ?>
+                                <ul class="card__list pager__page">
+                                    <?php foreach ($topics as $topic): ?>
+                                    <li>
+                                        <span class="card__bullet"><?= icon('check-circle', 18) ?></span>
+                                        <span><?= e($topic) ?></span>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="pager__controls">
+                            <button type="button" class="pager__arrow" data-pager-step="-1" aria-label="Previous topics"><?= icon('chevron-left', 16) ?></button>
+                            <ul class="pager__dots">
+                                <?php foreach ($topic_pages as $page => $topics): ?>
+                                <li>
+                                    <button type="button" data-pager-dot="<?= $page ?>"
+                                            aria-label="Topics <?= $page + 1 ?> of <?= count($topic_pages) ?>"></button>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <button type="button" class="pager__arrow" data-pager-step="1" aria-label="More topics"><?= icon('chevron-right', 16) ?></button>
+                        </div>
+                    </div>
+                    <?php else: ?>
                     <ul class="card__list">
                         <?php foreach ($service['items'] as $item): ?>
                         <li>
@@ -64,6 +98,7 @@ $pin_position = static function (array $pin) use ($map): array {
                         </li>
                         <?php endforeach; ?>
                     </ul>
+                    <?php endif; ?>
 
                     <a href="<?= e(wa_link('Halo, saya ingin bertanya mengenai layanan ' . $service['title'] . '.')) ?>"
                        target="_blank" rel="noopener" class="btn btn--frost card__action">

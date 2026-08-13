@@ -67,9 +67,9 @@ $hero_points = [
                         <h3 class="job__title"><?= e($job['title']) ?></h3>
                         <p class="job__summary"><?= e($job['summary']) ?></p>
 
-                        <button type="button" class="job__toggle" data-job-toggle aria-expanded="false" aria-controls="<?= $panel_id ?>"
+                        <button type="button" class="job__toggle" data-toggle-panel aria-expanded="false" aria-controls="<?= $panel_id ?>"
                                 data-label-closed="View Job Details" data-label-open="Hide Job Details">
-                            <span data-job-toggle-label>View Job Details</span>
+                            <span data-toggle-panel-label>View Job Details</span>
                             <?= icon('chevron-down', 16) ?>
                         </button>
                     </div>
