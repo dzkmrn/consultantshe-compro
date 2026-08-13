@@ -4,23 +4,10 @@
  *
  * 'icon'   — key from includes/icons.php
  * 'items'  — bullet list on the card; a nested array is one bullet with line breaks.
- * 'topics' — optional long list. Too long for a card, so the home page puts it
- *            behind a toggle that opens a full-width panel under the grid.
+ * 'topics' — optional long list. The card pages through it instead of showing
+ *            'items', and /services prints the whole thing.
  */
 return [
-    [
-        'title' => 'Procurement',
-        'icon'  => 'briefcase',
-        'items' => [
-            'SHE Equipment',
-            'Office & Training Equipment',
-            'PPE',
-            'Uniform & Fire Retardant Coverall',
-            'Corporate Gift Set',
-            'Milestone Souvenir',
-            'Office Stationery, etc.',
-        ],
-    ],
     [
         'title' => 'Consultancy',
         'icon'  => 'presentation',
