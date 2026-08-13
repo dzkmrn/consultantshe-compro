@@ -1,0 +1,15 @@
+---
+# Deployment for cPanel's Git Version Control.
+#
+# The clone lives in ~/repositories/, which Apache never serves, so pulling
+# alone changes nothing on the site. This copies the site into the document
+# root, and is what the "Deploy HEAD Commit" button runs.
+#
+# The file list is an allow-list on purpose: the design artboards in reference/
+# and reference2/ and the Vercel-only files (api/, vercel.json, router.php)
+# would otherwise be published alongside the site.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jasagen1/public_html
+    - /bin/cp -Rf assets data includes pages config.php index.php ic_app.webp $DEPLOYPATH/
+    - /bin/cp -f .htaccess $DEPLOYPATH/.htaccess
