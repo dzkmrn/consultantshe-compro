@@ -385,8 +385,7 @@ h1, h2, h3, h4 {
     color: var(--white);
     transition: background-color var(--ease), opacity var(--ease);
 }
-.pager__arrow:hover:not(:disabled) { background: var(--green-primary); }
-.pager__arrow:disabled { opacity: 0.3; cursor: default; }
+.pager__arrow:hover { background: var(--green-primary); }
 
 .pager__dots { display: flex; align-items: center; gap: 0.4rem; }
 .pager__dots button {

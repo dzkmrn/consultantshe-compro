@@ -37,6 +37,9 @@
     }
 
     /* ------------------------------------------- Paged list inside a card */
+    const PAGER_INTERVAL = 3000;
+    const stillness = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     document.querySelectorAll('[data-pager]').forEach((pager) => {
         const track = pager.querySelector('[data-pager-track]');
         if (!track) return;
@@ -45,9 +48,12 @@
         const dots = Array.from(pager.querySelectorAll('[data-pager-dot]'));
         const steps = Array.from(pager.querySelectorAll('[data-pager-step]'));
         let current = 0;
+        let timer = null;
 
+        // Wraps both ways, so the last page rolls back to the first and the
+        // arrows never dead-end.
         const show = (index) => {
-            current = Math.max(0, Math.min(index, pages.length - 1));
+            current = (index + pages.length) % pages.length;
             track.style.transform = `translateX(-${current * 100}%)`;
 
             // Pages off to the side stay in the DOM, so hide them from assistive
@@ -57,18 +63,38 @@
                 page.setAttribute('aria-hidden', String(i !== current));
             });
             dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
-            steps.forEach((step) => {
-                const next = current + Number(step.dataset.pagerStep);
-                step.disabled = next < 0 || next > pages.length - 1;
-            });
+        };
+
+        const stop = () => {
+            clearInterval(timer);
+            timer = null;
+        };
+        const play = () => {
+            stop();
+            if (pages.length < 2 || stillness.matches) return;
+            timer = setInterval(() => show(current + 1), PAGER_INTERVAL);
+        };
+        // A tap or a click restarts the countdown, so the list never moves out
+        // from under someone who has just chosen a page.
+        const goTo = (index) => {
+            show(index);
+            play();
         };
 
         steps.forEach((step) => {
-            step.addEventListener('click', () => show(current + Number(step.dataset.pagerStep)));
+            step.addEventListener('click', () => goTo(current + Number(step.dataset.pagerStep)));
         });
-        dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+        // Hold still while the card is being read or tabbed through.
+        pager.addEventListener('mouseenter', stop);
+        pager.addEventListener('mouseleave', play);
+        pager.addEventListener('focusin', stop);
+        pager.addEventListener('focusout', play);
+        stillness.addEventListener('change', play);
 
         show(0);
+        play();
     });
 
     /* --------------------------------- Disclosure: vacancy detail, topic lists */

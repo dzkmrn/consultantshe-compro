@@ -71,6 +71,7 @@ $pin_position = static function (array $pin) use ($map): array {
                             </div>
                         </div>
 
+                        <?php if (count($topic_pages) > 1): ?>
                         <div class="pager__controls">
                             <button type="button" class="pager__arrow" data-pager-step="-1" aria-label="Previous topics"><?= icon('chevron-left', 16) ?></button>
                             <ul class="pager__dots">
@@ -83,6 +84,7 @@ $pin_position = static function (array $pin) use ($map): array {
                             </ul>
                             <button type="button" class="pager__arrow" data-pager-step="1" aria-label="More topics"><?= icon('chevron-right', 16) ?></button>
                         </div>
+                        <?php endif; ?>
                     </div>
                     <?php else: ?>
                     <ul class="card__list">
