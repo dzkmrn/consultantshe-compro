@@ -23,7 +23,7 @@ return [
         ],
     ],
     [
-        'name'  => 'Bangun Negeri Centre',
+        'name'  => 'RA Premiere',
         'image' => 'train3.png',
         'alt'   => 'Training room at Bangun Negeri Centre',
         'address' => [
