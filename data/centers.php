@@ -27,9 +27,9 @@ return [
         'image' => 'train3.png',
         'alt'   => 'Training room at Bangun Negeri Centre',
         'address' => [
-            'Jl. Swadaya Pabuaran 1 Ciangsana',
-            'Kec. Gn. Putri, Kabupaten Bogor',
-            'West Java 16968',
+            'Jl. Intan No.25 1, RT.1/RW.2,',
+            'Cilandak Barat, Kec. Cilandak, Kota Jakarta Selatan',
+            'DKI Jakarta 12430',
         ],
     ],
 ];

@@ -28,11 +28,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_submit'])) {
     }
 }
 
+// Every value is actionable: tapping the email opens a mail client, the number
+// opens WhatsApp, and the address opens Maps.
 $contact_methods = [
-    ['icon' => 'map-pin-solid',   'label' => 'Alamat',    'value' => SITE_ADDRESS],
-    ['icon' => 'mail-solid',      'label' => 'Email',     'value' => SITE_EMAIL],
-    ['icon' => 'whatsapp',        'label' => 'WhatsApp',  'value' => SITE_PHONE],
-    ['icon' => 'instagram-solid', 'label' => 'Instagram', 'value' => SITE_INSTAGRAM],
+    [
+        'icon'  => 'map-pin-solid',
+        'label' => 'Alamat',
+        'value' => SITE_ADDRESS,
+        'url'   => 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode(SITE_ADDRESS),
+    ],
+    [
+        'icon'  => 'mail-solid',
+        'label' => 'Email',
+        'value' => SITE_EMAIL,
+        'url'   => 'mailto:' . SITE_EMAIL,
+    ],
+    [
+        'icon'  => 'whatsapp',
+        'label' => 'WhatsApp',
+        'value' => SITE_PHONE,
+        'url'   => wa_link(),
+    ],
+    [
+        'icon'  => 'instagram-solid',
+        'label' => 'Instagram',
+        'value' => SITE_INSTAGRAM,
+        'url'   => 'https://instagram.com/' . SITE_INSTAGRAM,
+    ],
 ];
 ?>
 
@@ -54,7 +76,7 @@ $contact_methods = [
                     <?= icon($method['icon'], 20) ?>
                     <div>
                         <strong><?= e($method['label']) ?></strong>
-                        <span><?= e($method['value']) ?></span>
+                        <a href="<?= e($method['url']) ?>"<?= str_starts_with($method['url'], 'mailto:') ? '' : ' target="_blank" rel="noopener"' ?>><?= e($method['value']) ?></a>
                     </div>
                 </li>
                 <?php endforeach; ?>

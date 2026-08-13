@@ -1379,7 +1379,8 @@ h1, h2, h3, h4 {
 .contact-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.75rem; }
 .contact-list li { display: flex; gap: 0.9rem; align-items: flex-start; color: var(--green-deep); }
 .contact-list strong { display: block; color: var(--gray-900); font-size: 0.8125rem; }
-.contact-list span { color: var(--gray-500); font-size: 0.9375rem; }
+.contact-list a { color: var(--gray-500); font-size: 0.9375rem; }
+.contact-list a:hover { color: var(--green-deep); text-decoration: underline; }
 .contact-list svg { flex-shrink: 0; margin-top: 2px; }
 
 .alert {

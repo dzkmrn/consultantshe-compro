@@ -17,10 +17,8 @@ define('SITE_INSTAGRAM', 'general_consultantshe');
 
 // Rendered one line per entry in the contact card.
 define('SITE_ADDRESS_LINES', [
-    'RA Premiere',
-    'Jl. Intan No.25 1, RT.1/RW.2, Cilandak Barat',
-    'Kec. Cilandak, Kota Jakarta Selatan',
-    'Daerah Khusus Ibukota Jakarta 12430',
+    'Pamulang Permai 1 Blok CX01/10 no 1',
+    'Pamulang Barat - Tangerang Selatan',
 ]);
 define('SITE_ADDRESS', implode(', ', SITE_ADDRESS_LINES));
 
