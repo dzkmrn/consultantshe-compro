@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/config.php';
 
+// Page files render after includes/header.php, so without a buffer the response
+// headers are already gone by the time one of them wants to redirect. Holding
+// the body until the script ends lets pages/contact.php answer a successful
+// POST with a 303 instead of leaving the submission in the browser's history.
+ob_start();
+
 /**
  * Which page to render.
  *

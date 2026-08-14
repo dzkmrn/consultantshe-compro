@@ -1379,6 +1379,10 @@ h1, h2, h3, h4 {
 }
 .form-group textarea { resize: vertical; }
 
+/* Spam trap. Moved off-screen rather than display:none, which the better bots
+   know to skip. Nobody who can see the page can put anything in it. */
+.form-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
 .contact-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.75rem; }
 .contact-list li { display: flex; gap: 0.9rem; align-items: flex-start; color: var(--green-deep); }
 .contact-list strong { display: block; color: var(--gray-900); font-size: 0.8125rem; }

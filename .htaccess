@@ -1,9 +1,53 @@
 RewriteEngine On
 RewriteBase /
 
-# Redirect to HTTPS (uncomment in production)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Everything below is deliberately built from mod_rewrite and Header alone.
+# Both belong to the FileInfo override class, which this site already relies on
+# for its clean URLs. "Options -Indexes" and "Require all denied" would read
+# more naturally, but they belong to override classes a shared host does not
+# have to delegate, and a directive Apache refuses to accept from .htaccess
+# fails the entire site with a 500 rather than being skipped.
+
+# AutoSSL proves the domain is ours by fetching a token from here over plain
+# HTTP, so this has to stay reachable and unredirected, and it has to sit above
+# the dotfile rule that would otherwise refuse it. Breaking this does not show
+# up for about ninety days, and then the certificate simply stops renewing.
+RewriteRule ^\.well-known/ - [L]
+
+# Nothing here is worth serving over plain HTTP, and a form post carrying a
+# visitor's contact details least of all. The forwarded header is checked too
+# because a CDN or cPanel's own proxy terminates TLS ahead of Apache, which
+# leaves HTTPS reading "off" on a connection that was in fact secure.
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Application PHP is meant to be reached through index.php, never on its own.
+# Apache happily executes any .php file it can find, so /pages/contact.php would
+# otherwise run outside the front controller — no header, no footer, and no
+# guarantee the constants it depends on exist. config.php is listed first
+# because it is the file that will hold credentials.
+RewriteRule ^(config\.php|data/|includes/|storage/|pages/) - [F,L,NC]
+
+# cPanel drops PHP's error log next to the script that produced it, under a name
+# with no extension that Apache is happy to serve as plain text. A log of what
+# has been failing is a map of where to push. Matched in any directory, not just
+# the root.
+RewriteRule (^|/)error_log$ - [F,L,NC]
+
+# Any path segment beginning with a dot: .cpanel.yml names the document root,
+# .vercelignore names what gets published, and a stray .env or .git would give
+# away considerably more. The dot has to follow a slash or start the path, so
+# ordinary names like style.css are untouched.
+RewriteRule (^|/)\. - [F,L]
+
+# A directory with no page behind it should not turn into a listing of
+# everything inside it. The document root is unaffected because index.php is
+# sitting there.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.php !-f
+RewriteCond %{REQUEST_FILENAME}/index.html !-f
+RewriteRule ^ - [F,L]
 
 # Skip existing files and directories
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -11,3 +55,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Route clean URLs to index.php
 RewriteRule ^([a-z0-9\-]+)/?$ index.php?page=$1 [L,QSA]
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Turn on once the certificate is confirmed good on every subdomain. Until
+    # then it is a way to lock visitors out of a site they can no longer reach.
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>

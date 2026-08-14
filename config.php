@@ -55,6 +55,7 @@ define('SITE_KEYWORDS', [
 define('SITE_OG_IMAGE', 'images/og-image.jpg');
 
 require_once __DIR__ . '/includes/icons.php';
+require_once __DIR__ . '/includes/security.php';
 
 /**
  * Origin the page is being served from, used for canonical and og:url.
