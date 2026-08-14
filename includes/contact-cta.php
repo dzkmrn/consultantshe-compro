@@ -28,6 +28,10 @@ $contact_rows = [
         'url'   => 'https://instagram.com/' . SITE_INSTAGRAM,
     ],
 ];
+
+// An email address has no natural place to wrap, so mark one after the @. On a
+// narrow phone the alternative is the browser snapping the domain mid-word.
+$contact_line = static fn (string $line): string => str_replace('@', '@<wbr>', e($line));
 ?>
 <section class="contact-cta" id="contact">
     <div class="container">
@@ -43,7 +47,7 @@ $contact_rows = [
                         <span class="contact-row__label"><?= e($row['label']) ?></span>
                         <a class="contact-row__value" href="<?= e($row['url']) ?>"<?= str_starts_with($row['url'], 'mailto:') ? '' : ' target="_blank" rel="noopener"' ?>>
                             <span class="contact-row__icon"><?= icon($row['icon'], 18) ?></span>
-                            <span><?= implode('<br>', array_map('e', $row['lines'])) ?></span>
+                            <span><?= implode('<br>', array_map($contact_line, $row['lines'])) ?></span>
                         </a>
                     </li>
                     <?php endforeach; ?>

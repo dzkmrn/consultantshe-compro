@@ -1043,6 +1043,10 @@ h1, h2, h3, h4 {
 }
 .contact-row__value:hover { color: var(--lime); }
 .contact-row__icon { flex-shrink: 0; margin-top: 2px; }
+/* The email is a single 32-character token with nowhere to break. Left alone it
+   sets the minimum width of the whole card, and on a narrow phone everything
+   past that minimum is cut off by the card's own overflow. */
+.contact-row__value > span { min-width: 0; overflow-wrap: anywhere; }
 
 .contact-cta__figure {
     position: relative;
@@ -1378,7 +1382,7 @@ h1, h2, h3, h4 {
 .contact-list { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.75rem; }
 .contact-list li { display: flex; gap: 0.9rem; align-items: flex-start; color: var(--green-deep); }
 .contact-list strong { display: block; color: var(--gray-900); font-size: 0.8125rem; }
-.contact-list a { color: var(--gray-500); font-size: 0.9375rem; }
+.contact-list a { color: var(--gray-500); font-size: 0.9375rem; overflow-wrap: anywhere; }
 .contact-list a:hover { color: var(--green-deep); text-decoration: underline; }
 .contact-list svg { flex-shrink: 0; margin-top: 2px; }
 
@@ -1433,12 +1437,23 @@ h1, h2, h3, h4 {
     .centers__grid { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; gap: 3rem; }
     .contact-page__grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
-    .contact-cta__card { grid-template-columns: 1fr; aspect-ratio: auto; }
+    /* minmax(0, 1fr), not 1fr: a bare 1fr refuses to go below its content's
+       min-content width, which pushes the card wider than the screen. */
+    .contact-cta__card { grid-template-columns: minmax(0, 1fr); aspect-ratio: auto; }
     .contact-cta__body { padding: 2.5rem 2rem 1rem; }
     /* Taller than it looks like it needs to be: the cut-out is a narrow standing
        portrait, so height is the only thing that gives it any presence here. */
     .contact-cta__figure { height: 400px; }
     .contact-cta__action { bottom: 8%; }
+    /* Stacked, the card is as wide as the page while the rows keep the narrow
+       measure they had beside the photo, leaving half the card empty. Two
+       columns take that space back wherever there is room for them. */
+    .contact-cta__rows {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem 2.5rem;
+    }
+    .contact-row { max-width: none; }
 
     .career-hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .career-hero__media { max-width: 460px; aspect-ratio: 4 / 3; }
@@ -1530,6 +1545,11 @@ h1, h2, h3, h4 {
 
     .hero__actions { flex-direction: column; align-items: stretch; }
     .hero__actions .btn { width: 100%; }
+
+    /* Every 8px of side padding here is 8px the address and email do not have
+       to wrap into, and this card holds the longest strings on the site. */
+    .contact-cta__body { padding: 2rem 1.25rem 1rem; }
+    .contact-row { max-width: none; }
 
     .job__banner { aspect-ratio: 16 / 7; }
     .job__body { padding: 1.5rem 1.25rem; }
