@@ -51,7 +51,7 @@ $contact_rows = [
             </div>
 
             <div class="contact-cta__figure">
-                <img src="<?= asset('images/ic_user_train.png') ?>" alt="" loading="lazy" width="435" height="620">
+                <img src="<?= asset('images/ic_user_train.png') ?>" alt="" loading="lazy" width="302" height="625">
                 <a href="<?= e(wa_link()) ?>" target="_blank" rel="noopener" class="btn btn--frost contact-cta__action">
                     Start a Conversation <?= icon('arrow-up-right', 16) ?>
                 </a>

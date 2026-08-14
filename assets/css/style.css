@@ -1435,7 +1435,9 @@ h1, h2, h3, h4 {
 
     .contact-cta__card { grid-template-columns: 1fr; aspect-ratio: auto; }
     .contact-cta__body { padding: 2.5rem 2rem 1rem; }
-    .contact-cta__figure { height: 340px; }
+    /* Taller than it looks like it needs to be: the cut-out is a narrow standing
+       portrait, so height is the only thing that gives it any presence here. */
+    .contact-cta__figure { height: 400px; }
     .contact-cta__action { bottom: 8%; }
 
     .career-hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
