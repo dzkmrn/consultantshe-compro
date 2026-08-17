@@ -227,7 +227,7 @@ $pin_position = static function (array $pin) use ($map): array {
 
     <section class="centers">
         <div class="container">
-            <h2 class="section-title">Our Training &amp; Assessment Centers</h2>
+            <h2 class="section-title">Our Facilities</h2>
             <div class="centers__grid">
                 <?php foreach ($centers as $center): ?>
                 <article class="center">
