@@ -7,8 +7,8 @@
  */
 $nav_items = [
     ['label' => 'Home',      'url' => BASE_URL,                'match' => 'home'],
-    ['label' => 'About Us',  'url' => BASE_URL . '#about',     'match' => null],
     ['label' => 'Services',  'url' => BASE_URL . '#services',  'match' => null],
+    ['label' => 'About Us',  'url' => BASE_URL . '#about',     'match' => null],
     ['label' => 'Career',    'url' => BASE_URL . 'careers',    'match' => 'careers'],
     ['label' => 'Contact',   'url' => BASE_URL . '#contact',   'match' => null],
 ];

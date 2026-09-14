@@ -100,6 +100,14 @@ function asset(string $path): string
     return ASSETS_URL . $relative . ($stamp ? '?v=' . $stamp : '');
 }
 
+/** Resolves a content image from the assets directory. */
+function media_url(string $path): string
+{
+    $path = ltrim($path, '/');
+
+    return asset(str_contains($path, '/') ? $path : 'images/' . $path);
+}
+
 /** Loads a content array from data/. */
 function content(string $name): array
 {
@@ -110,4 +118,10 @@ function content(string $name): array
 function e(?string $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+}
+
+/** Returns the supplied copy until translations are introduced. */
+function text(string $key, string $fallback): string
+{
+    return e($fallback);
 }

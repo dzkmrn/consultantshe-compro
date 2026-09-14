@@ -9,19 +9,28 @@
  */
 return [
     [
+        'title' => 'Digitalisation',
+        'icon'  => 'monitor',
+        'items' => [
+            'SHE Equipment',
+            'Office & Training Equipment',
+            'PPE',
+            'Uniform & Fire Retardant Coverall',
+            'Corporate Gift Set',
+            'Milestone Souvenir',
+            'Office Stationery, etc.',
+        ],
+    ],
+    [
         'title' => 'Consultancy',
         'icon'  => 'presentation',
         'items' => [
-            [
-                'HSE Management Systems — SMK3, SMKM Migas,',
-                'SMKP, CSMS, ISO 45001/9001/14001/29001, PSM',
-            ],
-            'SOP, forms & practical operational tools',
-            'Risk & gap assessment · Safety culture maturity',
-            'Roadmap implementation aligned with industry best practice',
+            'SHE Management System',
             'Organizational Development',
             'Technical and NonTechnical Assessment & Coaching',
             'Training Need Analysis',
+            'Cultural Assessment',
+            'Robust Safety Culture Development',
             'SHE Inspection',
         ],
     ],
@@ -93,16 +102,6 @@ return [
             'HSE Digitalization',
             'HSE Career Mentoring',
             'HSE in Oil & Gas Industry',
-        ],
-    ],
-    [
-        'title' => 'Digitalisation',
-        'icon'  => 'monitor',
-        'items' => [
-            'Digital Permit to Work — role-based approvals & close-out',
-            'Incident & observation reporting (unsafe acts/conditions)',
-            'Dashboards · KPI · Action tracking · Journey Management',
-            'Mobile-friendly inspections, audits, MCU monitoring',
         ],
     ],
 ];

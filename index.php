@@ -61,11 +61,6 @@ $page_meta = [
         'description' => 'Documentation of HSE competency assessment, training, and consulting work by '
             . 'PT Jasa General Consultant SHE across Indonesia.',
     ],
-    'about' => [
-        'title'       => 'About Us - ' . SITE_NAME,
-        'description' => 'PT Jasa General Consultant SHE is an Indonesian consultancy for HSE competency '
-            . 'assessment, safety training, and Safety, Health, and Environment management.',
-    ],
     'services' => [
         'title'       => 'Our Services - ' . SITE_NAME,
         'description' => 'HSE competency assessment, SHE consulting, competency development and training, '

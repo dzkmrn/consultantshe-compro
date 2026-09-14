@@ -1,0 +1,9 @@
+# Uploaded files are data, never code.
+php_flag engine off
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule \.(php|phtml|phar|cgi|pl|py|sh|html?)$ - [F,L,NC]
+</IfModule>
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>
