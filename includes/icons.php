@@ -10,7 +10,7 @@
 
 const ICON_PATHS = [
     // --- Service cards -------------------------------------------------
-    'monitor' => '<rect x="2.5" y="4" width="19" height="13.5" rx="2.2"/><path d="M8.5 21h7M12 17.5V21"/>',
+    'cart' => '<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L21 8H6"/>',
     'presentation' => '<path d="M3 3h18"/><path d="M4.5 3v10.5a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5V3"/><path d="M12 15v6M12 21l-3.5 0M12 21l3.5 0"/>',
     'graduation-cap' => '<path d="M12 3.2 2.5 8 12 12.8 21.5 8z"/><path d="M6.4 10.3v4.9c0 1.7 2.5 3 5.6 3s5.6-1.3 5.6-3v-4.9"/><path d="M21.5 8v5.4"/>',
 

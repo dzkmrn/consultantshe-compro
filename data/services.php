@@ -9,8 +9,8 @@
  */
 return [
     [
-        'title' => 'Digitalisation',
-        'icon'  => 'monitor',
+        'title' => 'Procurement',
+        'icon'  => 'cart',
         'items' => [
             'SHE Equipment',
             'Office & Training Equipment',
