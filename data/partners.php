@@ -11,5 +11,5 @@ return [
     ['name' => 'PT. Mitra Hijau Asia',               'file' => 'partner_ord8.png'],
     ['name' => 'SBI',                                'file' => 'partner_ord9.png'],
     ['name' => 'SBI',                                'file' => 'partner_ord10.png'],
-    ['name' => 'SBI',                                'file' => 'partner_ord11.png'],
+    ['name' => 'SBI',                                'file' => 'partner_ord11`.png'],
 ];

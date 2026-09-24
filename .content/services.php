@@ -104,7 +104,7 @@ return array (
   ),
   2 => 
   array (
-    'title' => 'Digitalisation',
+    'title' => 'Procurement',
     'icon' => 'monitor',
     'items' => 
     array (
