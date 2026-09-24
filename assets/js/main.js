@@ -50,14 +50,10 @@
         let current = 0;
         let timer = null;
 
-        // Wraps both ways, so the last page rolls back to the first and the
-        // arrows never dead-end.
         const show = (index) => {
             current = (index + pages.length) % pages.length;
             track.style.transform = `translateX(-${current * 100}%)`;
 
-            // Pages off to the side stay in the DOM, so hide them from assistive
-            // tech and from tabbing rather than leaving them silently reachable.
             pages.forEach((page, i) => {
                 page.toggleAttribute('inert', i !== current);
                 page.setAttribute('aria-hidden', String(i !== current));
@@ -74,19 +70,19 @@
             if (pages.length < 2 || stillness.matches) return;
             timer = setInterval(() => show(current + 1), PAGER_INTERVAL);
         };
-        // A tap or a click restarts the countdown, so the list never moves out
-        // from under someone who has just chosen a page.
         const goTo = (index) => {
             show(index);
             play();
         };
 
         steps.forEach((step) => {
-            step.addEventListener('click', () => goTo(current + Number(step.dataset.pagerStep)));
+            step.addEventListener('click', () => {
+                const direction = Number(step.dataset.pagerStep) || 1;
+                goTo(current + direction);
+            });
         });
         dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 
-        // Hold still while the card is being read or tabbed through.
         pager.addEventListener('mouseenter', stop);
         pager.addEventListener('mouseleave', play);
         pager.addEventListener('focusin', stop);

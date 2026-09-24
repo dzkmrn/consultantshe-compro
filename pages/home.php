@@ -65,24 +65,74 @@ $pin_position = static function (array $pin) use ($map): array {
                 <?= text('home.services.heading', 'Practical Solutions to Strengthen Your SHE Performance') ?></h2>
 
             <div class="services__grid">
-                <?php foreach ($services as $service): ?>
-                    <article class="card">
+                <?php foreach ($services as $serviceIndex => $service): ?>
+                    <?php $pagerPages = $serviceIndex === 1 && !empty($service['topics']) ? array_chunk($service['topics'], 7) : []; ?>
+                    <article class="card<?= $pagerPages ? ' card--pager' : '' ?>"<?= $pagerPages ? ' data-pager' : '' ?>>
                         <span class="card__icon"><?= icon($service['icon'], 24) ?></span>
                         <h3 class="card__title"><?= e($service['title']) ?></h3>
 
-                        <ul class="card__list">
-                            <?php foreach ($service['items'] as $item): ?>
-                                <li>
-                                    <span class="card__bullet"><?= icon('check-circle', 18) ?></span>
-                                    <span><?php
-                                    // A nested array is one bullet whose lines are kept as authored.
-                                    echo is_array($item)
-                                        ? implode('<br>', array_map('e', $item))
-                                        : e($item);
-                                    ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php if ($pagerPages): ?>
+                            <div class="card__pager-shell">
+                                <button type="button" class="card__pager-step card__pager-step--prev" data-pager-step="-1" aria-label="Previous page">
+                                    <span aria-hidden="true">‹</span>
+                                </button>
+
+                                <div class="card__pager">
+                                    <div class="card__pager-track" data-pager-track>
+                                        <div class="card__page">
+                                            <ul class="card__list">
+                                                <?php foreach ($service['items'] as $item): ?>
+                                                    <li>
+                                                        <span class="card__bullet"><?= icon('check-circle', 18) ?></span>
+                                                        <span><?php
+                                                        echo is_array($item)
+                                                            ? implode('<br>', array_map('e', $item))
+                                                            : e($item);
+                                                        ?></span>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+
+                                        <?php foreach ($pagerPages as $pageIndex => $page): ?>
+                                            <div class="card__page" aria-hidden="true">
+                                                <ul class="card__list card__list--compact">
+                                                    <?php foreach ($page as $item): ?>
+                                                        <li>
+                                                            <span class="card__bullet"><?= icon('check-circle', 18) ?></span>
+                                                            <span><?= e($item) ?></span>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="card__pager-step card__pager-step--next" data-pager-step="1" aria-label="Next page">
+                                    <span aria-hidden="true">›</span>
+                                </button>
+                            </div>
+
+                            <div class="card__pager-controls" aria-label="Slide navigation">
+                                <?php foreach ($pagerPages as $pageIndex => $page): ?>
+                                    <button type="button" class="card__pager-dot" data-pager-dot aria-label="Lihat halaman <?= $pageIndex + 1 ?>" aria-current="<?= $pageIndex === 0 ? 'true' : 'false' ?>"></button>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <ul class="card__list">
+                                <?php foreach ($service['items'] as $item): ?>
+                                    <li>
+                                        <span class="card__bullet"><?= icon('check-circle', 18) ?></span>
+                                        <span><?php
+                                        echo is_array($item)
+                                            ? implode('<br>', array_map('e', $item))
+                                            : e($item);
+                                        ?></span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
 
                         <a href="<?= e(wa_link('Halo, saya ingin bertanya mengenai layanan ' . $service['title'] . '.')) ?>"
                             target="_blank" rel="noopener" class="card__action">
