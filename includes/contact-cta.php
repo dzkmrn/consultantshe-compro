@@ -57,7 +57,7 @@ $contact_items = [
             </div>
 
             <div class="contact-cta__figure">
-                <img class="contact-cta__person" src="<?= asset('images/lets_discuss_model_woman.png') ?>"
+                <img class="contact-cta__person" src="<?= asset('images/lets_discuss_model_woman.webp') ?>"
                     alt="SHE Consultant" loading="lazy" width="302" height="625">
                 <a href="<?= e(wa_link()) ?>" target="_blank" rel="noopener" class="contact-cta__btn">
                     Start a Conversation <?= icon('arrow-up-right', 18) ?>
